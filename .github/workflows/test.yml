@@ -66,6 +66,11 @@ jobs:
         with:
           command: test
           args: --workspace
-      - name: List all files
+      - name: Be a bit nicer on GitHub by not uploading thse files
         run: |
-          find target
+          rm -rf target/debug/deps target/debug/incremental
+      - name: Upload target directory
+        uses: actions/upload-artifact@v2
+        with:
+          name: target
+          path: target
